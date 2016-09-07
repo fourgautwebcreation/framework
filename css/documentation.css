@@ -1,0 +1,18 @@
+/*==============================================================================
+                                 DOCUMENTATION
+==============================================================================*/
+body{background-color:#BDBDBD;}
+
+.documentation{width:80%;margin:auto;}
+  .documentation ul{display:block;text-align:center;position:fixed;top:0;left:0;width:100%;background-color:#FFFFFF;height:49px;border-bottom:1px solid #000000;}
+    .documentation ul li{display:inline-block;list-style:none;height:100%;vertical-align:middle;}
+      .documentation ul li.download{margin-left:100px;}
+      .documentation ul li a{padding:0.5em;line-height:50px;}
+
+  .documentation .content{padding-top:50px;width:100%;}
+    .documentation .content h2{text-decoration:underline;}
+    .documentation .content .sous_dossier{background-color:#FFFFFF;border-radius:1em;padding:1em;margin:1em auto;width:100%;}
+      .documentation .content .sous_dossier img{display:block;margin:auto;}
+      .documentation .content .sous_dossier h3 span{cursor:pointer;color:#BDBDBD;}
+        .documentation .content .sous_dossier h3 span:hover{color:#000000;}
+        .documentation .content .sous_dossier .details{display:none;}

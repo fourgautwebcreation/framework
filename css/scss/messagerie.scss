@@ -1,0 +1,57 @@
+$gray : #A4A4A4;
+$white : #FFFFFF;
+$black : #000000;
+
+.point_green{display:inline-block;vertical-align:middle;margin:0 0.5em;width:10px;height:10px;border-radius:5px;background-color:green;}
+.point_red{display:inline-block;vertical-align:middle;margin:0 0.5em;width:10px;height:10px;border-radius:5px;background-color:red;}
+
+
+.general_box{cursor:pointer;border:2px solid $gray;position:fixed;bottom:0;right:0;height:339px;background-color:$white;}
+ .general_box_top p{text-align:center;height:50px;max-height:50px;line-height:50px;}
+
+ .general_box_middle{height:250px;max-height:250px;overflow:auto;}
+  .general_box_middle table tr{cursor:pointer;}
+
+.tchat{border:2px solid $gray;position:fixed;bottom:0;right:0;background-color:$white;}
+  .tchat_top{cursor:pointer;height:49px;border-bottom:1px solid $gray;}
+    .tchat_top i{cursor:pointer;}
+    .tchat_top img{max-height:49px;}
+
+  .tchat_middle{height:215px;width:100%;max-width:100%;overflow-y:auto;}
+
+  .tchat_bottom{height:50px;max-height:50px;}
+
+    .tchat_bottom form{cursor:pointer;position:relative;overflow:hidden;display:inline-block;vertical-align:middle;height:20px;}
+      .tchat_bottom form i{}
+      .tchat_bottom form input[type="file"]{cursor:pointer;opacity:0;position:absolute;top:0;left:0;padding:0;}
+    .tchat_bottom .echo_upload{margin-left:1em;display:inline-block;vertical-align:middle;height:20px;max-height:20px;}
+
+    .tchat_bottom textarea{height:50px;max-height:50px;padding:0;margin:0;}
+
+/* Discution */
+
+.tchat_middle .discution{min-height:100%;display:block;max-width:100%;position:relative;}
+  .tchat_middle .discution img.loading{position:absolute;top:50%;left:50%;width:14px;height:14px;margin-top:-7px;margin-left:-7px;}
+
+  .tchat_middle .discution .block_message{display:block;width:90%;margin:0 auto;height:auto;padding:0;}
+    .tchat_middle .discution .block_message .message{margin-top:0.5em;margin-bottom:0.5em;display:inline-block;padding:0;}
+
+
+      /* message envoyé */
+      .tchat_middle .discution .block_message .message_to{width:80%;margin-left:20%;}
+        .tchat_middle .discution .block_message .message_to .content_message{overflow:hidden;display:inline-block;position:relative;padding:0.5em 0.5em 0.5em 0.5em;border-radius:0.25em;background-color:#eff0f1;word-break:break-word;}
+          .tchat_middle .discution .block_message .message_to .content_message .statut{width:0.5em;font-size:0.5em;position:absolute;bottom:0;right:0.5em;text-align:center;}
+          .tchat_middle .discution .block_message .message_to .content_message .statut i{margin-bottom:0.125em;}
+        .tchat_middle .discution .block_message .message_to span{font-size:14px;text-align:left;color:$black;text-overflow:ellipsis;}
+        .tchat_middle .discution .block_message .message_to span a{color:$black;}
+
+      /* message reçu */
+      .tchat_middle .discution .block_message .message_from{max-width:80%;padding:0.5em;border-radius:0.25em;background-color:#58ACFA;color:$white;}
+        .tchat_middle .discution .block_message .message_from a{color:$white;}
+
+      .tchat_middle .discution .block_message .message a{text-decoration:none;}
+        .tchat_middle .discution .block_message .message a span.link{text-decoration:underline;margin-bottom:0.25em;display:block;}
+          .tchat_middle .discution .block_message .message a div{display:block;}
+
+          .tchat_middle .discution .block_message .message a div.description{overflow:hidden;text-overflow:ellipsis;margin:0.25em 0;}
+            .tchat_middle .discution .block_message .message a div.description span{font-size:0.75em;font-style:italic;white-space:nowrap;}
