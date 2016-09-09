@@ -1,0 +1,14 @@
+Options -Indexes
+Options +FollowSymlinks
+
+RewriteEngine On
+RewriteBase /
+RewriteCond %{REQUEST_FILENAME} !-f
+
+RewriteCond %{REQUEST_URI} !^css
+RewriteCond %{REQUEST_URI} !^js
+RewriteCond %{REQUEST_URI} !^php
+RewriteCond %{REQUEST_URI} !^img
+
+RewriteRule ^([a-z-\--\_-\=]+)$ index.php?namespace=$1 [L]
+#commentaire
