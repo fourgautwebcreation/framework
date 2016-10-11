@@ -1,4 +1,5 @@
 <?php
+
 echo $rooter->head;
 
 if(empty($session_id)):

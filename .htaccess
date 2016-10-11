@@ -9,6 +9,7 @@ RewriteCond %{REQUEST_URI} !^css
 RewriteCond %{REQUEST_URI} !^js
 RewriteCond %{REQUEST_URI} !^php
 RewriteCond %{REQUEST_URI} !^img
+RewriteCond %{REQUEST_URI} !^/documentation
 
 RewriteRule ^([a-z-\--\_-\=]+)$ index.php?namespace=$1 [L]
 #commentaire

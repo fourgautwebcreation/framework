@@ -1,4 +1,13 @@
 <?php
+
+/**
+* Cette fonction remplace tous les caracteres spéciaux
+*
+* @param string $chaine La chaine à traiter
+*
+* @return string $chaine La chaine traitée
+*/
+
 function pure_characters($chaine)
 {
 
@@ -40,4 +49,3 @@ function pure_characters($chaine)
 
   return $chaine;
 }
-?>

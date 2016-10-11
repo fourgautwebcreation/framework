@@ -1,4 +1,16 @@
 <?php
+
+/**
+* Cette fonction est utilisée dans le cadre de la messagerie instantanée
+* Elle remplace les liens des messages par les vidéos ou les og:image des liens en question
+*
+* @param string $text Le texte transmis
+*
+* @param int $id_message L'identifiant du message dans lequel se trouve le texte (utilisé par jQuery)
+*
+* @return string $text Le html à retourner
+*/
+
 ini_set('user_agent','Mozilla/5.0 (Windows NT x.y; rv:10.0) Gecko/20100101 Firefox/10.0');
 function replace_links($text,$id_message)
 {
@@ -137,5 +149,3 @@ function replace_links($text,$id_message)
 
  return $text;
 }
-
-?>

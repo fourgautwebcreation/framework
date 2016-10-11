@@ -1,7 +1,6 @@
 <?php
 
 //Déconnexion
-
 if(isset($_GET['page']) && $_GET['page']=='deconnexion')
 {
   $bdd->update('administrateurs',array('admin_deconnexion="'.time().'"'),array('admin_id="'.$_SESSION['admin'].'"'));
@@ -14,5 +13,6 @@ if(isset($_GET['page']) && $_GET['page']=='deconnexion')
 $rooter->get_head(1);
 $rooter->get_footer(1,$error);
 $session_id = verif_session('admin');
+
 include $rooter->view;
 ?>

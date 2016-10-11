@@ -1,4 +1,23 @@
 <?php
+/**
+* Cette fonction copie une image donnée en une nouvelle image
+*
+* @param string $img Le lien de l'image d'origine
+*
+* @param string $dossier_copy Le dossier ou se trouvera la nouvelle image
+*
+* @param int $width La taille désirée de la nouvelle image
+*
+* @param string $extension L'extension de l'image d'origine
+*
+* @param string $new_name Le nom de la nouvelle image
+*
+* @param int $delete Indication de suppresion de l'image d'origine. 0 pour non, 1 pour oui
+*
+* @return int $sauvegarde Le succès de la copie. 0 pour non, 1 pour oui
+*
+*/
+
 function copy_resample($img,$dossier_copy,$width,$extension,$new_name,$delete = 0)
 {
 
@@ -42,4 +61,3 @@ function copy_resample($img,$dossier_copy,$width,$extension,$new_name,$delete = 
 
   return $sauvegarde;
 }
-?>

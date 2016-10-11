@@ -32,6 +32,15 @@ class bdd
   return $this;
   }
 
+  /**
+  * Fonction de débug de requête sql
+  *
+  * @param object $req La requête à traiter
+  *
+  * @return array $debug Le tableau contenant les erreurs
+  *
+  * @return string $failed_request L'indication sur l'erreur
+  */
 
   function debug($req)
   {
@@ -42,6 +51,14 @@ class bdd
     }
   }
 
+  /**
+  * Fonction d'éxécution de requête sql
+  *
+  * @param object $req La requête à traiter
+  *
+  * @return int $result L'éxécution de la requête. 0 pour non, 1 pour oui
+  */
+  
   function executeRequest($req)
   {
       $req = $this->connected->prepare($req);

@@ -1,4 +1,15 @@
 <?php
+
+/**
+* Fonction vérifiant la validité d'une adresse mail
+*
+* @uses Pays::construct Pour la liste des extension par pays
+*
+* @param string $email L'email renseigné
+*
+* @return int $ok La validation de l'email. 0 pour non, 1 pour oui
+*/
+
 function verif_email($email)
 {
   GLOBAL $countries;
@@ -22,9 +33,9 @@ function verif_email($email)
         $ok = 1;
       }
       //on parcours le tableau des pays et verifie si l'extension correspond
-      foreach($countries->extensions as $extension)
+      foreach($pays->list as $pays)
       {
-        if($extension['extension'] == $domaine)
+        if($pays['extension'] == $domaine)
         {
           $ok = 1;
         }
@@ -33,4 +44,3 @@ function verif_email($email)
   }
   return $ok;
 }
-?>

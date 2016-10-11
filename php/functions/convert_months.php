@@ -1,4 +1,14 @@
 <?php
+
+/**
+* Cette fonction convertit les mois chiffrés en mois lettrés
+*
+* @param int $month Le mois à convertir
+*
+*
+* @return string $month Le mois en lettres
+*/
+
 function convert_months($month)
 {
   $month = intval($month);
@@ -16,4 +26,3 @@ function convert_months($month)
   $month = str_replace($in,$out,$month);
   return $month;
 }
-?>

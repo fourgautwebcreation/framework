@@ -1,4 +1,13 @@
 <?php
+
+/**
+* Fonction remplaçant un enchainement de caractère par un smiley correspondant
+*
+* @param string $text Le texte à traiter
+*
+* @return $text Le texte retourné une fois les remplacement effectués
+*/
+
 function smileys($text)
 {
  $text = htmlspecialchars_decode($text);
@@ -40,4 +49,3 @@ function smileys($text)
  $text = str_replace($in,$out,$text);
  return $text;
 }
-?>

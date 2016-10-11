@@ -1,13 +1,18 @@
 <?php
-if(!isset($GLOBALS['rooter']))
+
+if(!isset($GLOBALS['rooter']) && !isset($GLOBALS['bdd']))
 {
-  $bdd = new bdd;
-  $bdd->connect();
+    require '../class/autoload.php';
+    Autoloader::register();
+    $bdd = new bdd;
+    $bdd->connect();
+    $rooter = new rooter;
 }
-
-GLOBAL $rooter;
-GLOBAL $bdd;
-
+else
+{
+    $rooter = $GLOBALS['rooter'];
+    $bdd = $GLOBALS['bdd'];
+}
 
 
 //Variable provenant du formulaire de connexion à l'extranet

@@ -15,6 +15,7 @@ class pays
       $list[$i]['id'] = $p['id'];
       $list[$i]['href_lang'] = $p['alpha3'];
       $list[$i]['nom'] = $p['nom_fr_fr'];
+      $list[$i]['extension'] = mb_strtolower($p['alpha2'],'UTF-8');
       $i++;
     }
 

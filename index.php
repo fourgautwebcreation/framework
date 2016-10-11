@@ -1,15 +1,19 @@
 <?php
 session_start();
 
-include_once 'php/includes/config.php';
-include_once 'php/class/rooter.php';
-include_once 'php/class/bdd.php';
-include_once 'php/class/pays.php';
-include_once 'php/class/site.php';
-include_once 'php/class/categories.php';
-include_once 'php/class/sous_categories.php';
-include_once 'php/class/produits.php';
+// Appel de la class autoload
+require 'php/class/autoload.php';
+$autoloader = new Autoloader();
 
+// Autoload des class
+$autoloader->register();
+
+// Connection à la base de données
+$bdd = new bdd;
+$bdd->connect();
+include_once 'php/includes/sql.php';
+
+// Construction des $_GET transmis au rooter
 $namespace = 'accueil';
 if(isset($_GET['namespace']) && !empty($_GET['namespace']))
 {
@@ -17,27 +21,30 @@ if(isset($_GET['namespace']) && !empty($_GET['namespace']))
   unset($_GET['namespace']);
 }
 
-$bdd = new bdd;
-$bdd->connect();
-include_once 'php/includes/sql.php';
-
-$site = new site;
-
+// Appel du rooter
 $rooter = new rooter;
 $rooter->get_url($namespace);
+
+// Autoload des fonctions
+$autoloader->autoloadFunctions();
+
+// Construction des détails du site
+$site = new site;
+
+// Redirection si site en maintenance
 if($site->maintenance == 1 && $rooter->current_view!=='admin' && $rooter->current_view!=='maintenance')
 {
   header('location:/maintenance');
   exit;
 }
 
-include 'php/includes/autoload.php';
-
+// Construction des autres objets
 $pays = new pays;
 $categories = new categories;
 $sous_categories = new sous_categories;
 $produits = new produits;
 
+// Inclusion du controller transmis par le rooter
 if(file_exists($rooter->controleur))
 {
   $inc = include $rooter->controleur;

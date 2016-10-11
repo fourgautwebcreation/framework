@@ -1,4 +1,14 @@
 <?php
+
+/**
+* Cette fonction est utilisée dans le cadre de la messagerie instantanée
+* Elle converti les timestamp de derniière connexion en minutes, heures ou date
+*
+* @param int $timestamp Le timestamp de la dernière connexion
+*
+* @return string|date $connexion Le temps passé depuis la dernière connexion
+*/
+
 function convert_timestamp($timestamp)
 {
  $today = date('d/m/Y',time());
@@ -34,4 +44,3 @@ function convert_timestamp($timestamp)
 
  return $connexion;
 }
-?>
