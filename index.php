@@ -1,6 +1,7 @@
 <?php
 session_start();
 
+include_once 'php/includes/config.php';
 include_once 'php/class/rooter.php';
 include_once 'php/class/bdd.php';
 include_once 'php/class/pays.php';
@@ -21,7 +22,6 @@ $bdd->connect();
 include_once 'php/includes/sql.php';
 
 $site = new site;
-$site->__construct();
 
 $rooter = new rooter;
 $rooter->get_url($namespace);

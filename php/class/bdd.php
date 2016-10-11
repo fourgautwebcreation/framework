@@ -9,9 +9,9 @@ class bdd
     if($_SERVER['REMOTE_ADDR']=="127.0.0.1")
     {
       $host = 'localhost';
-      $db_name = '';
+      $db_name = 'developpement';
       $db_user = 'root';
-      $db_pass = '';
+      $db_pass = 'root';
     }
     else
     {
@@ -35,16 +35,23 @@ class bdd
 
   function debug($req)
   {
-    $this->debug = $req->errorInfo();
-    return $this;
+    if(ENVIRONNEMENT == 'dev')
+    {
+        $this->debug = $req->errorInfo();
+        $this->failed_request = $req->queryString;
+    }
   }
 
-  //fonction execute
-  function exec($requete)
+  function executeRequest($req)
   {
-    $req = $this->connected->prepare($requete);
-    $result = $req->execute();
-    bdd::debug($req);
+      $req = $this->connected->prepare($req);
+      $this->result = $req->execute();
+
+      if($this->result==0)
+      {
+        bdd::debug($req);
+      }
+      return $this;
   }
 
   //fonction de select sql
@@ -75,7 +82,6 @@ class bdd
     if($order!==null){$order_by = $order;}
 
     $req = $this->connected->prepare('SELECT '.$select.' FROM '.$from.$where_content.' '.$order);
-    $this->requete = $req;
     $this->result = $req->execute();
     //Si la demande concerne une while / fetch
     if($type==0)
@@ -88,7 +94,6 @@ class bdd
       $array = $req->rowCount();
     }
 
-    //si un débug est demandé
     if($this->result==0)
     {
       bdd::debug($req);
@@ -142,10 +147,8 @@ class bdd
     $list_values .= ')';
 
       $req = $this->connected->prepare('INSERT INTO '.$table.$list_columns.$list_values);
-      $this->requete = $req;
       $this->result = $req->execute();
 
-      //si un débug est demandé
       if($this->result==0)
       {
         bdd::debug($req);
@@ -154,7 +157,7 @@ class bdd
   }
 
   //fonction update sql
-  function update($table,$updates,$where=null,$debug=null)
+  function update($table,$updates,$where,$debug=null)
   {
     $i = 0;
     $up = '';
@@ -191,9 +194,8 @@ class bdd
     }
 
     $req = $this->connected->prepare('UPDATE '.$table.' SET '.$up.$where_content);
-    $this->requete = $req;
     $this->result = $req->execute();
-    //si un débug est demandé
+
     if($this->result==0)
     {
       bdd::debug($req);
@@ -202,7 +204,7 @@ class bdd
   }
 
   //fonction delete sql
-  function delete($table,$where,$debug)
+  function delete($table,$where=null,$debug=0)
   {
     $i = 0;
     $up = '';
@@ -223,9 +225,8 @@ class bdd
     }
 
     $req = $this->connected->prepare('DELETE FROM '.$table.' '.$where_content);
-    $this->requete = $req;
     $this->result = $req->execute();
-    //si un débug est demandé
+
     if($this->result==0)
     {
       bdd::debug($req);
@@ -233,6 +234,11 @@ class bdd
     return $this;
   }
 
-}
+  //last insert id
+  function lastInsertId($name)
+  {
+    $last = $this->connected->lastInsertId($name);
+    $this->lastInsertId = $last;
+  }
 
-?>
+}

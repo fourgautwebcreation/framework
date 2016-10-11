@@ -12,7 +12,7 @@ $req = '
         `message_statut` int(11) NOT NULL DEFAULT 0.00
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         ';
-$bdd->exec($req);
+$bdd->executeRequest($req);
 
 //création du table "options"
 $req = '
@@ -28,7 +28,7 @@ $req = '
         `option_messagerie` int(11) NOT NULL DEFAULT 0.00
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         ';
-$bdd->exec($req);
+$bdd->executeRequest($req);
 
 $bdd->select('*','options');
 $count = $bdd->rep->rowCount();
@@ -49,7 +49,7 @@ $req = '
         `categorie_modifiable` int(11)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         ';
-$bdd->exec($req);
+$bdd->executeRequest($req);
 
 //insertion des la catégorie "non classés"
 $bdd->select('*','categories',array('categorie_id="1"'));
@@ -69,12 +69,13 @@ $req = '
         `sous_categorie_modifiable` INT(11)
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         ';
-$bdd->exec($req);
+$bdd->executeRequest($req);
 
 //insertion de la sous_catégorie "aucune"
-$bdd->select('*','categories',array('sous_categorie_id="1"'));
+$bdd->select('*','sous_categories',array('sous_categorie_id="1"'));
 $count = $bdd->rep->rowCount();
-if($count==0)
+
+if($count == 0)
 {
 $bdd->insert('sous_categories',array('sous_categorie_id','sous_categorie_nom','sous_categorie_modifiable'),array('1','"aucune"','0'));
 }
@@ -93,7 +94,7 @@ $req = '
         `produit_timestamp` TEXT
         ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
         ';
-$bdd->exec($req);
+$bdd->executeRequest($req);
 
 //création du table "pays"
 $req =
@@ -111,7 +112,7 @@ $req =
 ) ENGINE=MyISAM AUTO_INCREMENT=242 DEFAULT CHARSET=utf8;
 ';
 
-$bdd->exec($req);
+$bdd->executeRequest($req);
 $bdd->select('*','pays');
 $count = $bdd->rep->rowCount();
 if($count == 0)
@@ -361,6 +362,6 @@ INSERT INTO `pays` (`id`, `code`, `alpha2`, `alpha3`, `nom_en_gb`, `nom_fr_fr`) 
 (239, 887, 'YE', 'YEM', 'Yemen', 'Yémen'),
 (240, 891, 'CS', 'SCG', 'Serbia and Montenegro', 'Serbie-et-Monténégro'),
 (241, 894, 'ZM', 'ZMB', 'Zambia', 'Zambie')";
-$bdd->exec($req);
+$bdd->executeRequest($req);
 }
 ?>

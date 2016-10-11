@@ -1,0 +1,49 @@
+$black : #000000;
+$white : #FFFFFF;
+
+/*==============================================================================
+Erreurs php
+==============================================================================*/
+.debug{background-color:$black;color:$white;position:fixed;top:0;left:0;width:100%;padding:1em;z-index:10000;font-size:16px;}
+    .debug .red{color:red;font-weight:bold;}
+i.close-debug{position:fixed;top:0;right:1em;cursor:pointer;color:$white;z-index:10001;}
+
+
+/*==============================================================================
+Ajout
+==============================================================================*/
+.add{margin-bottom:2em;}
+.add i{cursor:pointer;font-size:1.5em;}
+form.form-add{display:none;}
+
+/*==============================================================================
+Informations
+==============================================================================*/
+.reference{display:inline-block;vertical-align:middle;}
+  .reference i{cursor:pointer;z-index:3;margin-right:1em;}
+
+.alert-info{opacity:0;border-radius:0.2em;position:fixed;top:0;right:0;padding:1em;max-width:20%;border:0.2em solid #FFFFFF;}
+
+/*==============================================================================
+Actions
+==============================================================================*/
+.action_update, .action_delete{cursor:pointer;}
+.form_action_update, .form_action_delete{display:inline-block;}
+tr.form_action_update{display:table-row;}
+/*==============================================================================
+Connexion
+==============================================================================*/
+
+#table_connexion{background:rgba(0,0,0,0.5);border-radius:0.5em;padding:0.5em;opacity:0;}
+  #table_connexion th, #table_connexion td{padding:0.5em;}
+  #table_connexion input[type="text"],#table_connexion input[type="password"]{padding:0.5em;}
+  #table_connexion input[type="button"]{background-color:transparent;border:none;font-weight:bold;color:#FFFFFF;cursor:pointer;border-radius:0.5em;padding:0.5em;}
+  #table_connexion input[type="button"]:hover{color:#e2001a;background-color:#FFFFFF;}
+
+/*==============================================================================
+Page options
+==============================================================================*/
+.options h2{padding:1em;text-align:center;font-size:1em;}
+.options i{margin-right:1em;}
+
+  .options .img-illustration{display:block;margin:0.5em auto;border:0.2em solid #FFFFFF;border-radius:0.2em;}

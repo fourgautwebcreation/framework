@@ -417,7 +417,7 @@ function hide_show_discution(his_id,show)
 
   if(show == 0)
   {
-    if(height == data)
+    if(height > 100)
     {
       $(div).css('height','50px');
     }
@@ -437,9 +437,9 @@ function hide_show_discution(his_id,show)
 function hide_show_box()
 {
   var div = $('.general_box');
-  var height = parseInt($(div).height())+4;
+  var height = parseInt($(div).height());
   var data = $(div).data('height');
-  if(height == data)
+  if(height > 50)
   {
     $(div).css('height','50px');
   }

@@ -95,6 +95,7 @@ class rooter
 
   function get_head($admin=0)
   {
+    GLOBAL $bdd;
     rooter::construct_head($admin);
     $head =
     '
@@ -118,6 +119,15 @@ class rooter
         </head>
         <body>
     ';
+    if(!empty($bdd->debug))
+    {
+        $head .= '<div class="debug">';
+            $head .= '<span class="red">Erreur Sql</span> : '.$bdd->debug[2];
+            $head .= '<br /> <span class="red">Requête</span> : <br />';
+            $head .= $bdd->failed_request;
+        $head .= '</div>';
+        $head .= '<i class="fa fa-remove close-debug"></i>';
+    }
     $this->head = $head;
     return $this;
   }
