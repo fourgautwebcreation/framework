@@ -1,9 +1,49 @@
 <?php
+
+/**
+* php/class/bdd.php
+*
+* Class de gestion de connexion et requêtes en base de donnée
+*/
+
 class bdd
 {
-  public $bdd;
 
-  //fonction de connexion à la base de données
+  /**
+  * @var object $connected
+  * La connexion PDO
+  */
+  private $connected;
+
+  /**
+  * @var array $debug
+  * Le tableau d'erreurs de la dernière opération
+  */
+  public $debug;
+
+  /**
+  * @var string $failed_request
+  * La requête qui a échoué
+  */
+  public $failed_request;
+
+  /**
+  * @var int $result
+  * L'éxécution de la requête true | false
+  */
+  public $result;
+
+  /**
+  * @var mixed $rep
+  * La réponse transmise par la requête
+  */
+  public $rep;
+  /**
+  * Fonction de connexion PDO à la base de donnée
+  *
+  * Possibilité de renseigner les arguments globaux et locaux
+  */
+
   function connect()
   {
     if($_SERVER['REMOTE_ADDR']=="127.0.0.1")
@@ -35,11 +75,18 @@ class bdd
   /**
   * Fonction de débug de requête sql
   *
-  * @param object $req La requête à traiter
+  * Pour l'affichage du débug, se reporter aux uses
   *
-  * @return array $debug Le tableau contenant les erreurs
+  * Cette fonction définit les variables $debug et $failed_request de l'objet $bdd
   *
-  * @return string $failed_request L'indication sur l'erreur
+  * @uses rooter::get_head
+  * Pour l'affichage du débug
+  *
+  * @uses php/includes/config.php
+  * Concernant la constante environnement
+  *
+  * @param object $req
+  * La requête à traiter
   */
 
   function debug($req)
@@ -52,13 +99,17 @@ class bdd
   }
 
   /**
-  * Fonction d'éxécution de requête sql
+  * Fonction de préparation et d'éxécution de requête SQL
   *
-  * @param object $req La requête à traiter
+  * Utilisée dans le cadre d'une requête SQL déjà formatée
   *
-  * @return int $result L'éxécution de la requête. 0 pour non, 1 pour oui
+  * @param object $req
+  * La requête à traiter
+  *
+  * @return int $result
+  * L'éxécution de la requête true | false
   */
-  
+
   function executeRequest($req)
   {
       $req = $this->connected->prepare($req);
@@ -71,11 +122,35 @@ class bdd
       return $this;
   }
 
-  //fonction de select sql
+  /**
+  * Fonction de séléction SQL
+  *
+  * Définit la variable $result de l'objet. Succés de l'insertion true | false
+  *
+  * Définit la variable $rep de l'objet. La réponse de la séléction
+  *
+  * @param string $select
+  * Les champs à séléctionner
+  *
+  * @param string $from
+  * Le table à séléctionner
+  *
+  * @param array $where
+  * Les conditions where de forme 'foo="bar"'
+  *
+  * @param string $order
+  * L'ordre de tri
+  *
+  * @param int $type
+  * Le type (0 pour un select, 1 pour un count)
+  *
+  *
+  * @return object $this
+  * L'objet $bdd
+  */
+
   function select($select,$from,$where=null,$order=null,$debug=null,$type=0)
   {
-    // $type = 0 : select sql_sql
-    //$type = 1 : count sql_sql
 
     $where_content = '';
     if(is_array($where))
@@ -119,6 +194,23 @@ class bdd
     $this->rep = $array;
     return $this;
   }
+
+  /**
+  * Fonction d'insertion SQL
+  *
+  * @param string $table
+  * Le table dans lequel le champ doit être inséré
+  *
+  * @param array $columns
+  * Les champs ciblés
+  *
+  * @param array $values
+  * Les valeurs à insérer
+  *
+  * @return int $result
+  * Succés de l'insertion true | false
+  *
+  */
 
   function insert($table,$columns,$values,$debug=null)
   {
@@ -173,7 +265,23 @@ class bdd
       return $this;
   }
 
-  //fonction update sql
+  /**
+  * Fonction d'update SQL
+  *
+  * @param string $table
+  * Le table où se trouvent les champs à update
+  *
+  * @param array $updates
+  * Les noms des champs et leurs nouvelles valeurs de type 'foo="bar"'
+  *
+  * @param array $where
+  * Les conditions where de forme 'foo="bar"'
+  *
+  * @return int $result
+  * Le succès de la requête true | false
+  *
+  */
+
   function update($table,$updates,$where,$debug=null)
   {
     $i = 0;
@@ -220,7 +328,19 @@ class bdd
     return $this;
   }
 
-  //fonction delete sql
+  /**
+  * Fonction de delete SQL
+  *
+  * @param string $table
+  * Le table ou se trouve la ligne à delete
+  *
+  * @param array $where
+  * Les conditions à remplir de type 'foo="bar"'
+  *
+  * @return int $result
+  * Le succès de la requête true | false
+  */
+
   function delete($table,$where=null,$debug=0)
   {
     $i = 0;
@@ -251,7 +371,16 @@ class bdd
     return $this;
   }
 
-  //last insert id
+  /**
+  * Fonction de récupération du dernier champ ajouté
+  *
+  * @param string $name
+  * Le nom du champ identifiant du type "user_id"
+  *
+  * @return int $lastInsertId
+  * L'identifiant du dernier champs ajouté
+  */
+
   function lastInsertId($name)
   {
     $last = $this->connected->lastInsertId($name);

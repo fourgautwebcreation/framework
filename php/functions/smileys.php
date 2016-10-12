@@ -1,6 +1,8 @@
 <?php
 
 /**
+* php/functions/smileys.php
+*
 * Fonction remplaçant un enchainement de caractère par un smiley correspondant
 *
 * @param string $text Le texte à traiter

@@ -1,8 +1,14 @@
 <?php
 
 /**
-* Cette fonction est utilisée dans le cadre de la messagerie instantanée
+* php/functions/replace_links.php
+*
+* Cette fonction est utilisée dans le cadre de la messagerie instantanée.
 * Elle remplace les liens des messages par les vidéos ou les og:image des liens en question
+* Si le lien concerne une plateforme vidéo, la miniature clickable de la vidéo apparaitra,
+* jQuery utilisera le data-plateforme et le data-iframe renseignés pour charger l'iframe correspondante.
+* Si ce n'est pas une plateforme vidéo, le click sur l'image redirigera vers le lien en target="_blank"
+*
 *
 * @param string $text Le texte transmis
 *

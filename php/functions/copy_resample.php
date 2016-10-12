@@ -1,5 +1,7 @@
 <?php
 /**
+* php/functions/copy_resample
+*
 * Cette fonction copie une image donnée en une nouvelle image
 *
 * @param string $img Le lien de l'image d'origine

@@ -1,8 +1,11 @@
 <?php
 
 /**
+* php/functions/convert_timestamp.php
+*
 * Cette fonction est utilisée dans le cadre de la messagerie instantanée
-* Elle converti les timestamp de derniière connexion en minutes, heures ou date
+* Elle converti les timestamp de dernière connexion en minutes, heures ou date
+* selon le delai passé depuis la dernière connexion
 *
 * @param int $timestamp Le timestamp de la dernière connexion
 *

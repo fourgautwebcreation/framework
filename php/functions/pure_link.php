@@ -1,8 +1,10 @@
 <?php
 
 /**
-* Cette fonction épure un lien en faisant appel à la fonction pure_charcters
-* et en la convertissant en minuscules
+* php/functions/pure_link.php
+*
+* Cette fonction épure un lien en faisant appel à la fonction pure_characters,
+* la convertit en minuscules et supprime les espaces afin de retourner un lien
 *
 * @param string $lien Le lien a épurer
 *

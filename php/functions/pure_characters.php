@@ -1,7 +1,9 @@
 <?php
 
 /**
-* Cette fonction remplace tous les caracteres spéciaux
+* php/functions/pure_characters.php
+*
+* Cette fonction remplace tous les caracteres spéciaux et symboles
 *
 * @param string $chaine La chaine à traiter
 *

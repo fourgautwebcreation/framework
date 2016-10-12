@@ -1,7 +1,31 @@
 <?php
+/**
+* php/class/produits.php
+*/
+
 class produits
 {
-  public $produits;
+  /**
+  * @var array $list
+  * La liste des produits
+  */
+  public $list;
+
+  /**
+  * @var array $categories
+  * La liste des catégories auxquelles les produits appartiennent
+  */
+  public $categories;
+
+  /**
+  * Fonction de construction automatique lorsque la class est instanciée
+  *
+  * @param int $admin True | false.
+  * Si la requête est effectuée depuis le panneau d'administration, on séléctionne même les produits sans quantité
+  *
+  * @return array $list Le timestamp d'ajout, l'identifiant, le nom, le prix, la quantité, l'image d'illustration,
+  * l'id de la catégorie, le nom de la catégorie, l'id de la sous catégorie, le nom de la sous catégorie
+  */
 
   function __construct($admin=null)
   {

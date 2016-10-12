@@ -1,9 +1,12 @@
 <?php
 
 /**
-* Fonction vérifiant la validité d'une adresse mail
+* php/functions/verif_email.php
 *
-* @uses Pays::construct Pour la liste des extension par pays
+* Fonction de validation d'une adresse mail en testant la présence d'un @ et d'une
+* extension de nom de domaine qui se trouve également dans la liste des noms de domaines de la class $pays
+*
+* @uses Pays::construct Pour la liste des extensions par pays
 *
 * @param string $email L'email renseigné
 *
@@ -12,7 +15,6 @@
 
 function verif_email($email)
 {
-  GLOBAL $countries;
   $ok = 0;
   //vérification de la présence d'un @
   if(strpos($email,'@'))

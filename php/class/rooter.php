@@ -1,10 +1,98 @@
 <?php
 
+/**
+* php/class/rooter.php
+*
+* @uses php/class/pays.php
+* @uses php/class/site.php
+* @uses php/includes/config.php
+*
+*/
+
 class rooter
 {
-  public $rooter;
 
-  function get_url($namespace='accueil')
+  /**
+  * @var string $error
+  * L'indication de l'erreur à afficher. Variable appelée dans la fonction get_footer
+  */
+  public $error = '';
+
+  /**
+  * @var string $dossier
+  * Le préfix utilisé pour l'inclusion html depuis la racine
+  */
+  public $dossier;
+
+  /**
+  * @var string $dossier_root
+  * Le préfix utilisé pour l'inclusion php depuis la racine
+  */
+  public $dossier_root;
+
+  /**
+  * @var string $current_view
+  * Le nom de la vue courante
+  */
+  public $current_view;
+
+  /**
+  * @var string $controleur
+  * L'url du controleur correspondant à la vue courante sous la forme "php/controleurs/ctrl_<current_view>.php"
+  * Cette url est inclue dans l'index.php
+  */
+  public $controleur;
+
+  /**
+  * @var string $view
+  * L'url de la vue correspondante à la vue courante sous la forme "php/views/view_<current_view>.php"
+  * Cette url est inclue dans le controleur correspondant
+  */
+  public $view;
+
+
+  /**
+  * @var string $secure_key
+  * La clé de sécurité transmise en paramètre et vérifiée à chaque modification dans le panneau d'administration
+  */
+  public $secure_key;
+
+  /**
+  * @var string|array $head
+  * Array lors de la fonction construct_head, string au format html lors de la fonction get_head
+  */
+  public $head;
+
+  /**
+  * @var string $footer
+  * Le footer au format html
+  */
+  public $footer;
+  
+  /**
+  * Fonction essentielle au rooting
+  *
+  * Cette fonction  définit le namespace url utilisé pour inclure le controleur et la vue correspondants
+  * et passe en paramètre les $_GET fournis sous la forme foo=bar/bar=foo dans l'url.
+  *
+  * Attention ! Le terme namespace ici ne représente pas le namespace php, il n'est qu'un simple nom de variable
+  *
+  * @param string|array $namespace
+  *         Le tableau fourni par un explode des "/" sur le $_GET['namespace'] effectué
+  *         dans l'index et transmis au préalable par l'url rewriting du htaccess.
+  *
+  * Exemple d'url : http://monsite.com/accueil/foo=bar/toto=foo
+  *
+  * accueil est retourné en array[0] = "acceuil", il est donc définit en tant que namespace
+  *
+  * foo est retourné en array[1] = "foo=bar", la fonction le transforme en $_GET['foo'] = "bar"
+  *
+  * toto est retourné en array[2] = "toto=foo", la fonction le transforme en $_GET['toto'] = "foo"
+  *
+  * @return array $this
+ */
+
+  public function get_url($namespace='accueil')
   {
     $this->dossier = '/';
     $this->dossier_root = $_SERVER['DOCUMENT_ROOT'].$this->dossier;
@@ -36,14 +124,25 @@ class rooter
     return $this;
   }
 
-  function construct_head($admin)
+  /**
+  * Fonction de construction du contenu de la balise head
+  *
+  * Elle définit les lignes google analytics, css, charset, titre_site, favicon, description,
+  * href_lang, og_description, og_image, og_title, robots, js, jquery, bootstrap, viewport ...
+  *
+  * @param int $admin
+  * true | False. Origine de l'appel (public ou administration), transmis par la fonction get_head
+  *
+  * @uses php/class/pays.php
+  * @uses php/class/site.php
+  */
+
+  private function construct_head($admin)
   {
     GLOBAL $site;
     $this->head['google_analytics'] =
     '
     ';
-
-    $this->error = '';
 
     $this->head['charset'] = '<meta charset="utf-8" />';
     $this->head['titre_site'] = '<title>'.ucfirst($this->current_view).' | '.$site->titre.'</title>';
@@ -89,11 +188,23 @@ class rooter
       $this->head['js'] .= '<script type="text/javascript" src="'.$this->dossier.'js/admin/ckeditor/ckeditor.js?'.time().'"></script>';
       $this->head['js'] .= '<script type="text/javascript" src="'.$this->dossier.'js/admin/references.js?'.time().'"></script>';
     }
-
-    return $this;
   }
 
-  function get_head($admin=0)
+  /**
+  * Fonction de construction du doctype et de la balise head
+  *
+  * Cette fonction fait appel à la fonction construct_head et fait echo de son contenu
+  * dans la balise html <head></head>. Elle ouvre également les balises <html> et <body>
+  * qui seront fermées par la fonction get_footer. C'est également cette fonction qui gère l'affichage
+  * du débug de la class bdd.
+  * Cette fonction doit être appelée dans le controleur
+  *
+  * @param int $admin True | false. Origine de l'appel (public ou administration)
+  *
+  * @return string $head Le head au format html <html><head></head><body>
+  */
+
+  public function get_head($admin=0)
   {
     GLOBAL $bdd;
     rooter::construct_head($admin);
@@ -132,7 +243,22 @@ class rooter
     return $this;
   }
 
-  function get_footer($admin=0,$error=null)
+  /**
+  * Fonction qui construit le footer
+  *
+  * Cette fonction doit être appelée dans le controleur
+  *
+  * @uses php/includes/config.php
+  *
+  * @param int $admin True | false. Origine de l'appel (public ou administration)
+  *
+  * @param string $error La variable $rooter->error, si non vide, un appel à une fonction
+  * javascript affichant l'erreur est effectué
+  *
+  *@return string $footer Le footer au format html
+  */
+
+  public function get_footer($admin=0,$error=null)
   {
     $footer =
     '
@@ -146,7 +272,7 @@ class rooter
         $footer =
         '
           <script type="text/javascript">
-            write_error(\''.addslashes($GLOBALS['error']).'\');
+            write_error(\''.addslashes($error).'\');
           </script>
           </body>
         </html>

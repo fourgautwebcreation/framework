@@ -1,6 +1,8 @@
 <?php
 
 /**
+* php/functions/send_mail.php
+*
 * Fonction utilisée pour l'envoi de mail
 *
 * @param string $from L'adresse mail de l'expéditeur

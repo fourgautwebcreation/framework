@@ -1,6 +1,9 @@
 <?php
 session_start();
 
+// Appel de la configuration
+require 'php/includes/config.php';
+
 // Appel de la class autoload
 require 'php/class/autoload.php';
 $autoloader = new Autoloader();

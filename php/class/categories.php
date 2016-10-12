@@ -1,7 +1,25 @@
 <?php
+/**
+* php/class/categories.php
+*
+*/
+
 class categories
 {
-  public $categories;
+
+  /**
+  * @var array $list
+  * La liste des catégories
+  */
+  public $list;
+
+  /**
+  * Fonction de construction automatique lorsque la class est instanciée
+  *
+  * Elle récupère en base de donnée dans le table catégories toutes les catégories renseignées
+  *
+  * @return array $list Le nom, l'identifiant et l'attribut modifiable de chaque ligne
+  */
 
   function __construct()
   {

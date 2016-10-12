@@ -1,7 +1,23 @@
 <?php
+/**
+* php/class/pays.php
+*/
+
 class pays
 {
-  public $pays;
+  /**
+  * @var array $list
+  * La liste des pays 
+  */
+  public $list;
+
+  /**
+  * Fonction de construction automaique lorsque la class est instanciée
+  *
+  * Elle récupère en base de données dans le table pays tous les pays renseignés
+  *
+  * @return array $list L'identifiant, le code alpha3, le nom et l'extension de domaine des pays
+  */
 
   function __construct()
   {

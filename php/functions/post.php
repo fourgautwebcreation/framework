@@ -2,6 +2,7 @@
 
 if(!isset($GLOBALS['rooter']) && !isset($GLOBALS['bdd']))
 {
+    require '../includes/config.php';
     require '../class/autoload.php';
     Autoloader::register();
     $bdd = new bdd;
@@ -41,7 +42,7 @@ if(isset($_POST['connexion_extranet']))
     }
     else
     {
-      $error = 'Ce compte n\'est pas reconnu';
+      $rooter->error = 'Ce compte n\'est pas reconnu';
     }
   }
 }
@@ -117,12 +118,12 @@ elseif(isset($_POST['secure']) && $_POST['secure']==$rooter->secure_key && isset
       }
       else
       {
-        $error = 'Ce nom est déjà utilisé';
+        $rooter->error = 'Ce nom est déjà utilisé';
       }
     }
     else
     {
-      $error = 'Le nom de la catégorie est vide';
+      $rooter->error = 'Le nom de la catégorie est vide';
     }
   }
 
@@ -143,12 +144,12 @@ elseif(isset($_POST['secure']) && $_POST['secure']==$rooter->secure_key && isset
       }
       else
       {
-        $error = 'Ce nom est déjà utilisé';
+        $rooter->error = 'Ce nom est déjà utilisé';
       }
     }
     else
     {
-      $error = 'Le nom de la catégorie est vide';
+      $rooter->error = 'Le nom de la catégorie est vide';
     }
   }
 
@@ -167,7 +168,7 @@ elseif(isset($_POST['secure']) && $_POST['secure']==$rooter->secure_key && isset
     }
     else
     {
-      $error = 'L\'identifiant de la catégorie est vide';
+      $rooter->error = 'L\'identifiant de la catégorie est vide';
     }
   }
 
@@ -187,12 +188,12 @@ elseif(isset($_POST['secure']) && $_POST['secure']==$rooter->secure_key && isset
       }
       else
       {
-        $error = 'Ce nom est déjà utilisé';
+        $rooter->error = 'Ce nom est déjà utilisé';
       }
     }
     else
     {
-      $error = 'Le nom de la sous catégorie est vide';
+      $rooter->error = 'Le nom de la sous catégorie est vide';
     }
   }
 
@@ -213,12 +214,12 @@ elseif(isset($_POST['secure']) && $_POST['secure']==$rooter->secure_key && isset
       }
       else
       {
-        $error = 'Ce nom est déjà utilisé';
+        $rooter->error = 'Ce nom est déjà utilisé';
       }
     }
     else
     {
-      $error = 'Le nom de la sous catégorie est vide';
+      $rooter->error = 'Le nom de la sous catégorie est vide';
     }
   }
 
@@ -236,7 +237,7 @@ elseif(isset($_POST['secure']) && $_POST['secure']==$rooter->secure_key && isset
     }
     else
     {
-      $error = 'L\'identifiant de la sous catégorie est vide';
+      $rooter->error = 'L\'identifiant de la sous catégorie est vide';
     }
   }
 
@@ -282,7 +283,7 @@ elseif(isset($_POST['secure']) && $_POST['secure']==$rooter->secure_key && isset
     }
     else
     {
-      $error = 'Merci de renseigner au minimum le nom et le prix';
+      $rooter->error = 'Merci de renseigner au minimum le nom et le prix';
     }
   }
 
@@ -347,7 +348,7 @@ elseif(isset($_POST['secure']) && $_POST['secure']==$rooter->secure_key && isset
     }
     else
     {
-      $error = 'Merci de renseigner au minimum le nom et le prix';
+      $rooter->error = 'Merci de renseigner au minimum le nom et le prix';
     }
   }
 }

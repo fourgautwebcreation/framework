@@ -1,10 +1,11 @@
 <?php
 
 /**
-* Cette fonction créée une clé de sécurité aléatoire
+* php/functions/create_secure_key.php
+*
+* Cette fonction créée une clé de sécurité aléatoire de 20 caractères encodée en md5
 *
 * @return string $key Le clé de sécurité
-*
 */
 
 function create_secure_key()

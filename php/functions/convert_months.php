@@ -1,6 +1,8 @@
 <?php
 
 /**
+* php/functions/convert_months.php
+*
 * Cette fonction convertit les mois chiffrés en mois lettrés
 *
 * @param int $month Le mois à convertir

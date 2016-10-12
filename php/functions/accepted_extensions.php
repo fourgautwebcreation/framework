@@ -1,7 +1,11 @@
 <?php
 
 /**
-* Cette fonction est utilisée afin de valider l'extension d'un fichier fourni
+* php/functions/accepted_extensions.php
+*
+* Cette fonction est utilisée afin de valider l'extension d'un fichier fourni.
+* Elle passe en revue un tableau d'extensions renseigné dans la variable $accepted
+* et compare ses valeurs à l'extension à vérifier
 *
 * @param string $extension L'extension a valider
 *

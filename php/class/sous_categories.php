@@ -1,7 +1,26 @@
 <?php
+/**
+* php/class/sous_categories.php
+*/
+
 class sous_categories
 {
-  public $sous_categories;
+
+  /**
+  * @var array $list
+  * La liste des sous catégories
+  */
+  public $list;
+
+
+  /**
+  * Fonction de construction automatique lorsque la class est instanciée
+  *
+  * Elle récupère en base de donnée, dans le table sous catégories, toutes les sous catégories renseignées
+  *
+  * @return array $list
+  * Le nom, l'identifiant et l'attribut modifiable de chaque ligne
+  */
 
   function __construct()
   {
