@@ -11,9 +11,25 @@ $nombre = intval($_GET['count']);
 $id_last = intval($_GET['id_last']);
 $statut_last = intval($_GET['statut_last']);
 
-include_once '../../class/bdd.php';
-include_once '../../functions/replace_links.php';
-include_once '../../functions/smileys.php';
+// Appel de la configuration
+require '../../includes/config.php';
+
+// Appel du rooter
+require '../../class/rooter.php';
+$rooter = new rooter($_GET);
+
+// Appel de la class autoload des class
+require '../../class/autoload.php';
+$autoloader = new Autoloader();
+// Autoload des class
+$autoloader->register();
+
+// Enregistrement des fonctions
+$autoloader->loadFunctions('../../functions');
+// Appel des fonctions
+$autoloader->callFunctions();
+
+// Connection à la base de données
 $bdd = new bdd;
 $bdd->connect();
 

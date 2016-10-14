@@ -6,7 +6,7 @@ $bdd->connect();
 
 $destinataire = intval($_GET['destinataire']);
 $expediteur = intval($_GET['expediteur']);
-$key = $_GET['key'];;
+$key = $_GET['key'];
 
 //vérification de sécurité
 $bdd->select('*','administrateurs',array('admin_id="'.$destinataire.'"','admin_key="'.$key.'"'));

@@ -3,8 +3,25 @@ set_time_limit(30);
 header('Content-Type: application/json');
 header("access-control-allow-origin: *");
 
-include_once '../../class/bdd.php';
-include_once '../../functions/convert_timestamp.php';
+// Appel de la configuration
+require '../../includes/config.php';
+
+// Appel du rooter
+require '../../class/rooter.php';
+$rooter = new rooter($_GET);
+
+// Appel de la class autoload des class
+require '../../class/autoload.php';
+$autoloader = new Autoloader();
+// Autoload des class
+$autoloader->register();
+
+// Enregistrement des fonctions
+$autoloader->loadFunctions('../../functions');
+// Appel des fonctions
+$autoloader->callFunctions();
+
+// Connection à la base de données
 $bdd = new bdd;
 $bdd->connect();
 
@@ -47,5 +64,4 @@ if(!empty($bdd->rep->rowCount()))
   arsort($membres);
   echo json_encode($membres);
 }
-
 ?>

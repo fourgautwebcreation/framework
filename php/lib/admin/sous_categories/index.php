@@ -37,7 +37,7 @@
         </p>
 
         <!-- affichage modification -->
-        <form method="post" class="hidden form_action_update" data-id="<?= $sous_categorie['id'];?>" action="/admin/page=categories" enctype="multipart/form-data">
+        <form method="post" class="hidden form_action_update" data-id="<?= $sous_categorie['id'];?>" action="/admin/page=sous_categories" enctype="multipart/form-data">
           <input type="hidden" name="type" value="update-sous-categorie" />
           <input type="hidden" name="secure" value="<?= $rooter->secure_key;?>" />
           <input type="hidden" name="id" value="<?= $sous_categorie['id'];?>" />

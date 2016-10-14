@@ -13,6 +13,3 @@ if(isset($_GET['page']) && $_GET['page']=='deconnexion')
 $rooter->get_head(1);
 $rooter->get_footer(1,$rooter->error);
 $session_id = verif_session('admin');
-
-include $rooter->view;
-?>

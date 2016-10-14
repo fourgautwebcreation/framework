@@ -19,9 +19,10 @@ function get_contacts()
 {
   $.getJSON('/php/lib/messagerie/contacts.php',{'id':id,'key':key})
   .fail(
-    function()
+    function(data)
     {
-      get_contacts();
+    alert(data);
+      //get_contacts();
     }
   )
   .success(

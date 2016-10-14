@@ -58,6 +58,12 @@ class rooter
   public $secure_key;
 
   /**
+  * @var bool $locked
+  * Autorisation de modification sur base de donnée true | false
+  */
+  public $locked = 1;
+
+  /**
   * @var string|array $head
   * Array lors de la fonction construct_head, string au format html lors de la fonction get_head
   */
@@ -68,7 +74,7 @@ class rooter
   * Le footer au format html
   */
   public $footer;
-  
+
   /**
   * Fonction essentielle au rooting
   *
@@ -92,8 +98,18 @@ class rooter
   * @return array $this
  */
 
-  public function get_url($namespace='accueil')
+  public function __construct($get = null)
   {
+      // Construction des $_GET transmis au rooter
+      if(is_array($get) && isset($get['namespace']))
+      {
+        $namespace = explode('/',$get['namespace']);
+        unset($_GET);
+      }
+      else
+      {
+        $namespace = 'accueil';
+      }
     $this->dossier = '/';
     $this->dossier_root = $_SERVER['DOCUMENT_ROOT'].$this->dossier;
     $this->current_view = $namespace;
@@ -119,7 +135,15 @@ class rooter
     }
 
     $this->controleur = $this->dossier_root.'php/controleurs/ctrl_'.$this->current_view.'.php';
+    if(!file_exists($this->controleur))
+    {
+        $this->controleur = $this->dossier_root.'php/controleurs/ctrl_default.php';
+    }
     $this->view = $this->dossier_root.'php/views/view_'.$this->current_view.'.php';
+    if(!file_exists($this->view))
+    {
+        $this->view = $this->dossier_root.'php/views/view_default.php';
+    }
     $this->secure_key = md5('autHorisationToupdatEoRdeleTE18357436*');
     return $this;
   }
