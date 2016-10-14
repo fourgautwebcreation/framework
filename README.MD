@@ -11,7 +11,7 @@
         1. 2 fichiers sont requis, le controleur et la vue
 
             1. Le controleur doit se trouver dans le dossier php/controleurs
-               et posséder la syntaxe ctrl_<nom>.php, ou <nom> est égal au paramètre
+               et posséder la syntaxe ctrl_\<nom\>.php, ou \<nom\> est égal au paramètre
                namespace définit dans le rooter.
                Exemple : pour l'url monsite.com/clients, le controleur relatif sera ctr_client.php
                S'il n'existe pas, il sera alors remplacé par ctrl_default.php
