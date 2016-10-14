@@ -16,7 +16,7 @@
                Exemple : pour l'url monsite.com/clients, le controleur relatif sera ctr_client.php
                S'il n'existe pas, il sera alors remplacé par ctrl_default.php
             2. La vue doit se trouver dans le dossier php/views
-               et posséder la syntaxe view_<nom>.php, ou <nom> est égal au paramètre
+               et posséder la syntaxe view_\<nom\>.php, ou \<nom\> est égal au paramètre
                namespace définit dans le rooter.
                Exemple : pour l'url monsite.com/clients, la vue relative sera view_client.php   
                Si elle n'existe pas, elle sera alors remplacée par view_default.php
@@ -25,7 +25,7 @@
 
         1. Ils doivent se trouver dans le dossier php/lib/post
 
-            1. Leur syntaxe doit être de forme <type>.php, ou type représente la variable type du POST     
+            1. Leur syntaxe doit être de forme \<type\>.php, ou type représente la variable type du POST     
             2. Chaque fichier doit vérifier que la propriété $locked du rooter est égale à 0 avant de poursuivre.
             3. Pour que la propriété $locked soit définie à 0, le POST doit posséder une variable secure_key équivalente à la propriété $secure_key du rooter
 
@@ -43,7 +43,7 @@
     1. Ordre d'inclusion de fichiers impératif et instanciation de class impératives
         1. php/includes/config.php contenant les constantes et le timezone
         2. php/class/rooter.php et instancier la class rooter
-            1. new rooter(<GET>)
+            1. new rooter(\<GET\>)
         3. php/class/autoload.php et instancier la class Autoloader
             1. new Autoloader
             2. Autoloader::register qui charge les class
